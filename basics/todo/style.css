@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background-color: lightsalmon;
+  height: 500px;
+  width: 400px;
+  padding: 3rem;
+  border-radius: 8px;
+}
+
+.input-container {
+    display: flex;
+    gap: 1rem;
+}
+
+input {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.add-button {
+    all: unset;
+    background-color: #eee;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.add-button:hover {
+    background-color: #ccc;
+}
+
+.add-button:focus {
+    outline: 2px solid #555;
+}
