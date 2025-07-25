@@ -8,6 +8,10 @@ html {
   font-size: 62.5%;
 }
 
+ul, li {
+  list-style: none;
+}
+
 body {
   font-family: sans-serif;
   height: 100vh;
@@ -34,7 +38,7 @@ main {
     border-bottom: 1px dashed #555;
 }
 
-input {
+.task-input {
     flex: 1;
     padding: 0.5rem;
     border-radius: 4px;
@@ -57,4 +61,29 @@ input {
 
 .add-button:focus {
     outline: 2px solid #555;
+}
+
+.section-tasks {
+  margin-top: 2rem;
+}
+
+.div-style {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.delete-button-style {
+  all: unset;
+  font-weight: bold;
+  background-color: #eee;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.delete-button-style:hover {
+  background-color: #ccc;
 }
