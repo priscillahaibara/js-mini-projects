@@ -8,6 +8,7 @@ This is a small learning project: a simple **interactive counter** built with **
 - Reset the counter to zero
 - Prevents negative values
 - Basic layout and styling using CSS
+- Added static typing using TypeScript
 
 ## 📚 Concepts Practiced
 
@@ -15,6 +16,7 @@ This is a small learning project: a simple **interactive counter** built with **
 - Dynamic content update using `textContent`
 - Basic layout using CSS Flexbox
 - Separation of concerns: HTML (structure), CSS (style), JS (behavior)
+- Type safety and type annotations with TypeScript
 
 ## 🖼️ Preview
 
