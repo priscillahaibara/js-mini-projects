@@ -7,7 +7,7 @@ const decrease = document.querySelector('.decrease');
 let count = 0;
 
 function updateDisplay() {
-    counterDisplay.textContent = count.toString();
+    counterDisplay.textContent = count
 }
 increase.addEventListener('click', () => {
     count++;
