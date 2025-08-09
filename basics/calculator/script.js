@@ -14,9 +14,16 @@ buttons.forEach((button) => {
     }
 
     if (btnValue === "=") {
-      const result = math.evaluate(expression);
-      display.textContent = result;
-      return;
+      try {
+        const result = math.evaluate(expression);
+        display.textContent = result;
+        expression = result.toString();
+        return;
+      } catch (error) {
+        display.textContent = "Error";
+        expression = "";
+        return;
+      }
     }
 
     expression += btnValue;
