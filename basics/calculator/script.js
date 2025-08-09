@@ -5,7 +5,7 @@ let expression = "";
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    btnValue = button.textContent;
+    const btnValue = button.textContent;
 
     if (btnValue === "C") {
       expression = "";
@@ -14,6 +14,8 @@ buttons.forEach((button) => {
     }
 
     if (btnValue === "=") {
+      const result = math.evaluate(expression);
+      display.textContent = result;
       return;
     }
 
