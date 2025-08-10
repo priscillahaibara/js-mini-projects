@@ -1,7 +1,9 @@
 # Javascript Mini Projects
-This repository contains small projects built with vanilla JavaScript (HTML, CSS, JS), mainly for learning purposes. Each project is in a separate folder.
+This repository contains small projects built with vanilla JavaScript (HTML, CSS, JS), mainly for learning purposes. <br>
+Each project can be accessed directly via the links below in the **Finished Projects** section.  
+For more details, feel free to explore the respective README.md files and source code located inside the `src` subfolders of each project.
 
-## ✅ Completed Projects
+## ✅ Finished Projects
 - [Calculator](https://priscillahaibara.github.io/js-mini-projects/basics/calculator) 
 - [Counter](https://priscillahaibara.github.io/js-mini-projects/basics/counter)
 - [To-do list](https://priscillahaibara.github.io/js-mini-projects/basics/todo)
