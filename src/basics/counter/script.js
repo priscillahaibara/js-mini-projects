@@ -3,11 +3,9 @@ const counterDisplay = document.querySelector('.counter-display');
 const increase = document.querySelector('.increase');
 const reset = document.querySelector('.reset');
 const decrease = document.querySelector('.decrease');
-
 let count = 0;
-
 function updateDisplay() {
-    counterDisplay.textContent = count
+    counterDisplay.textContent = count.toString();
 }
 increase.addEventListener('click', () => {
     count++;

@@ -3,7 +3,7 @@ const increase = document.querySelector('.increase') as HTMLButtonElement;
 const reset = document.querySelector('.reset') as HTMLButtonElement;
 const decrease = document.querySelector('.decrease') as HTMLButtonElement;
 
-let count = 0;
+let count: number = 0;
 
 function updateDisplay(): void {
   counterDisplay.textContent = count.toString();
