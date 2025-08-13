@@ -4,9 +4,9 @@ Each project can be accessed directly via the links below in the **Finished Proj
 For more details, feel free to explore the respective README.md files and source code located inside the `src` subfolders of each project.
 
 ## ✅ Finished Projects
-- [Calculator](https://priscillahaibara.github.io/js-mini-projects/basics/calculator) 
-- [Counter](https://priscillahaibara.github.io/js-mini-projects/basics/counter)
-- [To-do list](https://priscillahaibara.github.io/js-mini-projects/basics/todo)
+- [Calculator](https://priscillahaibara.github.io/js-mini-projects/src/basics/calculator) 
+- [Counter](https://priscillahaibara.github.io/js-mini-projects/src/basics/counter)
+- [To-do list](https://priscillahaibara.github.io/js-mini-projects/src/basics/todo)
 
 ## 🚧 Work in Progress
 
