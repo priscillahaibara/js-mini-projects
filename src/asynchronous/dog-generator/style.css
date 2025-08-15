@@ -20,8 +20,31 @@ button {
   all: unset;
 }
 
+p {
+  font-size: 1.6rem;
+}
+
+.dogContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .dogImg {
   width: 300px;
   height: 300px;
   object-fit: cover;
+}
+
+.getDogButton {
+  padding: 1rem;
+  background-color: orange;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.getDogButton:hover {
+  background-color: rgb(208, 136, 1);
 }
