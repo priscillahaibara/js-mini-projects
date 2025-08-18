@@ -5,10 +5,10 @@ const list = document.querySelector(".task-list")! as HTMLUListElement;
 
 /* Add task */
 function addTask(task: string): void {
-  const div = document.createElement("div");
-  const li = document.createElement("li");
-  const checkbox = document.createElement("input");
-  const deleteButton = document.createElement("button");
+  const div: HTMLDivElement = document.createElement("div");
+  const li: HTMLLIElement = document.createElement("li");
+  const checkbox: HTMLInputElement = document.createElement("input");
+  const deleteButton: HTMLButtonElement = document.createElement("button");
 
   div.classList.add("div-style");
   deleteButton.classList.add("delete-button-style");
@@ -39,7 +39,7 @@ function addTask(task: string): void {
 }
 
 addButton.addEventListener("click", () => {
-  const task = input.value.trim();
+  const task: string = input.value.trim();
   if (task !== "") {
     addTask(task);
     input.value = "";
