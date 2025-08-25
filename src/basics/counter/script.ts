@@ -1,29 +1,26 @@
-const counterDisplay = document.querySelector('.counter-display') as HTMLElement;
-const increase = document.querySelector('.increase') as HTMLButtonElement;
-const reset = document.querySelector('.reset') as HTMLButtonElement;
-const decrease = document.querySelector('.decrease') as HTMLButtonElement;
+const counterDisplay = document.querySelector(
+  ".counter-display"
+) as HTMLElement;
+const increase = document.querySelector(".increase") as HTMLButtonElement;
+const reset = document.querySelector(".reset") as HTMLButtonElement;
+const decrease = document.querySelector(".decrease") as HTMLButtonElement;
 
-let count: number = 0;
+let count: number = Number(localStorage.getItem('count') || 0)
 
-function updateDisplay(): void {
-  counterDisplay.textContent = count.toString();
+function updateCount(newCount: number): void {
+  count = newCount;
+  counterDisplay.textContent = String(count);
+  localStorage.setItem("count", String(count));
 }
 
-increase.addEventListener('click', () => {
-  count++;
-  updateDisplay();
-});
+updateCount(count);
 
-decrease.addEventListener('click', () => {
+increase.addEventListener("click", () => updateCount(count + 1));
+
+decrease.addEventListener("click", () => {
   if (count > 0) {
-    count--;
-    updateDisplay();
+    updateCount(count - 1);
   }
 });
 
-reset.addEventListener('click', () => {
-  count = 0;
-  updateDisplay();
-})
-
-updateDisplay();
+reset.addEventListener("click", () => updateCount(0));

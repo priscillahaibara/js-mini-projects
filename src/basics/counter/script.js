@@ -1,24 +1,19 @@
 "use strict";
-const counterDisplay = document.querySelector('.counter-display');
-const increase = document.querySelector('.increase');
-const reset = document.querySelector('.reset');
-const decrease = document.querySelector('.decrease');
-let count = 0;
-function updateDisplay() {
-    counterDisplay.textContent = count.toString();
+const counterDisplay = document.querySelector(".counter-display");
+const increase = document.querySelector(".increase");
+const reset = document.querySelector(".reset");
+const decrease = document.querySelector(".decrease");
+let count = Number(localStorage.getItem('count') || 0);
+function updateCount(newCount) {
+    count = newCount;
+    counterDisplay.textContent = String(count);
+    localStorage.setItem("count", String(count));
 }
-increase.addEventListener('click', () => {
-    count++;
-    updateDisplay();
-});
-decrease.addEventListener('click', () => {
+updateCount(count);
+increase.addEventListener("click", () => updateCount(count + 1));
+decrease.addEventListener("click", () => {
     if (count > 0) {
-        count--;
-        updateDisplay();
+        updateCount(count - 1);
     }
 });
-reset.addEventListener('click', () => {
-    count = 0;
-    updateDisplay();
-});
-updateDisplay();
+reset.addEventListener("click", () => updateCount(0));
