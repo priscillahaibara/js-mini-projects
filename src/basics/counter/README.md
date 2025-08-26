@@ -8,13 +8,14 @@ This is a small learning project: a simple **interactive counter** built with **
 - Reset the counter to zero
 - Prevents negative values
 - Basic layout and styling using CSS
-- Added static typing using TypeScript
+- **TypeScript support** with type annotations for safer code
+- Counter value is **persisted in localStorage**
 
 ## 📚 Concepts Practiced
 
 - DOM manipulation with JavaScript (`querySelector`, `addEventListener`)
 - Dynamic content update using `textContent`
-- Basic layout using CSS Flexbox
+- **State persistence** using `localStorage`
 - Separation of concerns: HTML (structure), CSS (style), JS (behavior)
 - Type safety and type annotations with TypeScript
 
