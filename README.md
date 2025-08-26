@@ -6,6 +6,7 @@ For more details, feel free to explore the respective README.md files and source
 ## ✅ Finished Projects
 - [Calculator](https://priscillahaibara.github.io/js-mini-projects/src/basics/calculator) 
 - [Counter](https://priscillahaibara.github.io/js-mini-projects/src/basics/counter)
+- [Dog-generator](https://priscillahaibara.github.io/js-mini-projects/src/asynchronous/dog-generator)
 - [To-do list](https://priscillahaibara.github.io/js-mini-projects/src/basics/todo)
 
 ## 🚧 Work in Progress
@@ -13,13 +14,15 @@ For more details, feel free to explore the respective README.md files and source
 More projects coming soon! Stay tuned as I explore more frontend concepts.
 
 ## 🧠 Topics Covered (so far)
-- Variables and data types   
-- Functions and arrow functions  
-- Conditionals  
-- Array methods  
-- Object manipulation  
+- Array methods   
 - DOM manipulation  
-- Event handling  
+- Asynchronous javascript
+- Web storage
 - Error handling  
 - Type safety and type annotations with TypeScript
 
+## 📌 How to Explore
+
+1. Click on any project link above to open the live demo.
+2. Open the project folder in `src` to check the code and project structure.
+3. For projects with TypeScript, check the `.ts` files for type annotations and logic.
