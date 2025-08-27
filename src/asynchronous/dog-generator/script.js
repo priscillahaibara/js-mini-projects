@@ -22,4 +22,6 @@ function getNewDog() {
     })
 }
 
+getNewDog();
+
 getDogButton.addEventListener("click", getNewDog);
