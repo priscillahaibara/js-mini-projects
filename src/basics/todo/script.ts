@@ -3,6 +3,10 @@ const input = document.querySelector(".task-input")! as HTMLInputElement;
 const addButton = document.querySelector(".add-button")! as HTMLButtonElement;
 const list = document.querySelector(".task-list")! as HTMLUListElement;
 
+let taskList = JSON.parse(localStorage.getItem('taskList') || '[]');
+
+taskList.forEach((task: string) => addTask(task))
+
 /* Add task */
 function addTask(task: string): void {
   const div: HTMLDivElement = document.createElement("div");
@@ -41,7 +45,9 @@ function addTask(task: string): void {
 addButton.addEventListener("click", () => {
   const task: string = input.value.trim();
   if (task !== "") {
-    addTask(task);
+    taskList.push(task);
+    localStorage.setItem("taskList", JSON.stringify(taskList));
     input.value = "";
+    addTask(task);
   }
 });

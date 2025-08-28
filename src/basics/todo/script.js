@@ -3,6 +3,8 @@
 const input = document.querySelector(".task-input");
 const addButton = document.querySelector(".add-button");
 const list = document.querySelector(".task-list");
+let taskList = JSON.parse(localStorage.getItem('taskList') || '[]');
+taskList.forEach((task) => addTask(task));
 /* Add task */
 function addTask(task) {
     const div = document.createElement("div");
@@ -36,7 +38,9 @@ function addTask(task) {
 addButton.addEventListener("click", () => {
     const task = input.value.trim();
     if (task !== "") {
-        addTask(task);
+        taskList.push(task);
+        localStorage.setItem("taskList", JSON.stringify(taskList));
         input.value = "";
+        addTask(task);
     }
 });
