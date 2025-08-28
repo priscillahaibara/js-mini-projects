@@ -3,12 +3,16 @@ const input = document.querySelector(".task-input")! as HTMLInputElement;
 const addButton = document.querySelector(".add-button")! as HTMLButtonElement;
 const list = document.querySelector(".task-list")! as HTMLUListElement;
 
-let taskList = JSON.parse(localStorage.getItem('taskList') || '[]');
+interface Task {
+  id: number;
+  text: string;
+}
 
-taskList.forEach((task: string) => addTask(task))
+let taskList: Task[] = JSON.parse(localStorage.getItem('taskList') || '[]');
 
-/* Add task */
-function addTask(task: string): void {
+taskList.forEach(task => addTask(task));
+
+function addTask(task: Task): void {
   const div: HTMLDivElement = document.createElement("div");
   const li: HTMLLIElement = document.createElement("li");
   const checkbox: HTMLInputElement = document.createElement("input");
@@ -18,36 +22,32 @@ function addTask(task: string): void {
   deleteButton.classList.add("delete-button-style");
   checkbox.type = "checkbox";
 
-  li.textContent = task;
+  li.textContent = task.text;
   deleteButton.textContent = "Delete task";
-  input.value = "";
 
   list.appendChild(div);
   div.appendChild(checkbox);
   div.appendChild(li);
   div.appendChild(deleteButton);
 
-  /* Adds a listener to mark as completed */
-  checkbox.addEventListener("change", function () {
-    if (checkbox.checked) {
-      li.style.textDecoration = "line-through";
-    } else {
-      li.style.textDecoration = "none";
-    }
+  checkbox.addEventListener("change", () => {
+    li.style.textDecoration = checkbox.checked ? "line-through" : "none";
   });
 
-  /* Listener to delete the task */
-  deleteButton.addEventListener("click", function () {
+  deleteButton.addEventListener("click", () => {
     list.removeChild(div);
+    taskList = taskList.filter(t => t.id !== task.id); 
+    localStorage.setItem('taskList', JSON.stringify(taskList));
   });
 }
 
 addButton.addEventListener("click", () => {
-  const task: string = input.value.trim();
-  if (task !== "") {
-    taskList.push(task);
+  const text = input.value.trim();
+  if (text !== "") {
+    const newTask: Task = { id: Date.now(), text }; 
+    taskList.push(newTask);
     localStorage.setItem("taskList", JSON.stringify(taskList));
     input.value = "";
-    addTask(task);
+    addTask(newTask);
   }
 });
