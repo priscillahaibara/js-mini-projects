@@ -9,6 +9,8 @@ const products = [
 const productsContainer = document.getElementById("products-container");
 const inputItems = document.getElementById("input-items");
 const addInputButton = document.getElementById("add-input-button");
+const totalQuantity = document.getElementById("total-quantity");
+const totalPrice = document.getElementById("total-price");
 
 let cart = [];
 
@@ -46,10 +48,20 @@ function addItemToCart() {
     button.addEventListener("click", (e) => {
       const productId = parseInt(e.target.dataset.id);
       const product = products.find((p) => productId === p.id);
-      cart.push(product)
-      console.log('Cart:', cart)
+      cart.push(product);
+
+      updateCartSummary();
+      console.log("Cart:", cart);
     });
   });
+}
+
+function updateCartSummary() {
+  const sumItems = cart.length;
+  const sumPrice = cart.reduce((sum, item) => sum + item.price, 0);
+
+  totalQuantity.textContent = `Total quantity: ${sumItems}`;
+  totalPrice.textContent = `Total price: ${sumPrice}`;
 }
 
 showItems();
