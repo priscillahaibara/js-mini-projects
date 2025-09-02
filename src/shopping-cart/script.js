@@ -7,26 +7,49 @@ const products = [
 ];
 
 const productsContainer = document.getElementById("products-container");
+const inputItems = document.getElementById("input-items");
+const addInputButton = document.getElementById("add-input-button");
 
-products.forEach((product) => {
-  const productContainer = document.createElement("div");
-  const productImg = document.createElement("img");
-  const productName = document.createElement("h2");
-  const productPrice = document.createElement("p");
-  const addProductButton = document.createElement("button");
+let cart = [];
 
-  productContainer.classList.add('product-container');
-  productImg.setAttribute("src", product.img);
-  productImg.setAttribute('alt', product.name);
-  productName.textContent = product.name;
-  productPrice.textContent = `$${product.price}`;
-  addProductButton.textContent = "Add to Cart";
-  addProductButton.classList.add('add-product-button');
-  addProductButton.dataset.id = product.id;
+function showItems() {
+  products.forEach((product) => {
+    const productContainer = document.createElement("div");
+    const productImg = document.createElement("img");
+    const productName = document.createElement("h2");
+    const productPrice = document.createElement("p");
+    const addCartButton = document.createElement("button");
 
-  productContainer.appendChild(productImg);
-  productContainer.appendChild(productName);
-  productContainer.appendChild(productPrice);
-  productContainer.appendChild(addProductButton);
-  productsContainer.appendChild(productContainer);
-});
+    productContainer.classList.add("product-container");
+    productImg.setAttribute("src", product.img);
+    productImg.setAttribute("alt", product.name);
+    productName.textContent = product.name;
+    productPrice.textContent = `$${product.price}`;
+    addCartButton.textContent = "Add to Cart";
+    addCartButton.classList.add("add-cart-button");
+    addCartButton.dataset.id = product.id;
+
+    productContainer.appendChild(productImg);
+    productContainer.appendChild(productName);
+    productContainer.appendChild(productPrice);
+    productContainer.appendChild(addCartButton);
+    productsContainer.appendChild(productContainer);
+  });
+
+  addItemToCart();
+}
+
+function addItemToCart() {
+  const addCartButton = document.querySelectorAll(".add-cart-button");
+
+  addCartButton.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const productId = parseInt(e.target.dataset.id);
+      const product = products.find((p) => productId === p.id);
+      cart.push(product)
+      console.log('Cart:', cart)
+    });
+  });
+}
+
+showItems();
