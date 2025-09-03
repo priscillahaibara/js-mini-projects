@@ -6,13 +6,18 @@ const products = [
   { id: 5, name: "dress", price: 40, img: "./assets/products/dress.jpg" },
 ];
 
-const productsContainer = document.getElementById("products-container");
+const productsSection = document.getElementById("products-section");
+const cartItems = document.getElementById("cart-items");
 const inputItems = document.getElementById("input-items");
 const addInputButton = document.getElementById("add-input-button");
 const totalQuantity = document.getElementById("total-quantity");
 const totalPrice = document.getElementById("total-price");
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("item")) || [];
+
+function saveItem() {
+  localStorage.setItem("item", JSON.stringify(cart));
+}
 
 function showItems() {
   products.forEach((product) => {
@@ -35,33 +40,49 @@ function showItems() {
     productContainer.appendChild(productName);
     productContainer.appendChild(productPrice);
     productContainer.appendChild(addCartButton);
-    productsContainer.appendChild(productContainer);
-  });
+    productsSection.appendChild(productContainer);
 
-  addItemToCart();
-}
+    addCartButton.addEventListener("click", () => {
+      const productId = product.id;
+      const item = cart.find((i) => i.id === productId);
 
-function addItemToCart() {
-  const addCartButton = document.querySelectorAll(".add-cart-button");
+      if (item) {
+        item.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
 
-  addCartButton.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const productId = parseInt(e.target.dataset.id);
-      const product = products.find((p) => productId === p.id);
-      cart.push(product);
-
+      saveItem();
+      renderCartItems();
       updateCartSummary();
-      console.log("Cart:", cart);
     });
   });
 }
 
 function updateCartSummary() {
-  const sumItems = cart.length;
-  const sumPrice = cart.reduce((sum, item) => sum + item.price, 0);
+  const sumItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const sumPrice = cart.reduce(
+    (sum, item) => sum + item.quantity * item.price,
+    0
+  );
 
   totalQuantity.textContent = `Total quantity: ${sumItems}`;
-  totalPrice.textContent = `Total price: ${sumPrice}`;
+  totalPrice.textContent = `Total price: $${sumPrice.toFixed(2)}`;
+}
+
+function renderCartItems() {
+  cartItems.innerHTML = "";
+  cart.forEach((item) => {
+    const div = document.createElement("div");
+    const p = document.createElement("p");
+    p.textContent = `${item.name}: ${item.price} x ${item.quantity} = ${
+      item.price * item.quantity
+    }`;
+    div.appendChild(p);
+    cartItems.appendChild(div);
+  });
 }
 
 showItems();
+renderCartItems();
+updateCartSummary();
