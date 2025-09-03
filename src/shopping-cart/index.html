@@ -9,16 +9,21 @@
   <body>
     <nav>Shopping Center</nav>
     <header>
-      <input type="text" placeholder="Search Items" id="input-items"/>
+      <input type="text" placeholder="Search Items" id="input-items" />
       <button id="add-input-button">Search</button>
     </header>
 
     <main>
-      <div id="products-container"></div>
-      <div id="cart-container">
-        <p id="total-quantity"></p>
-        <p id="total-price"></p>
-      </div>
+      <section id="products-section"></section>
+
+      <section id="cart-section">
+        <div id="cart-items"></div>
+
+        <div id="cart-total">
+          <p id="total-quantity"></p>
+          <p id="total-price"></p>
+        </div>
+      </section>
     </main>
 
     <footer>Contact information</footer>
