@@ -12,7 +12,11 @@ const addInputButton = document.getElementById("add-input-button");
 const totalQuantity = document.getElementById("total-quantity");
 const totalPrice = document.getElementById("total-price");
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('item')) || [];
+
+function saveItem() {
+  localStorage.setItem('item', JSON.stringify(cart))
+}
 
 function showItems() {
   products.forEach((product) => {
@@ -51,7 +55,7 @@ function addItemToCart() {
       cart.push(product);
 
       updateCartSummary();
-      console.log("Cart:", cart);
+      saveItem();
     });
   });
 }
@@ -65,3 +69,4 @@ function updateCartSummary() {
 }
 
 showItems();
+updateCartSummary();
