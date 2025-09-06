@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="/src/shopping-cart/style.css" />
   </head>
   <body>
-    <nav>Shopping Center</nav>
     <header>
-      <input type="text" placeholder="Search Items" id="input-items" />
-      <button id="add-input-button">Search</button>
+      <nav>
+        <p>Shopping Center</p>
+        <ion-icon name="cart-outline" id="cart-icon"></ion-icon>
+      </nav>
     </header>
 
     <main>
+      <section id="input-section">
+        <input type="text" placeholder="Search items" id="input-items" />
+        <button id="add-input-button">Search</button>
+      </section>
       <section id="products-section"></section>
 
       <section id="cart-section">
@@ -27,6 +32,15 @@
     </main>
 
     <footer>Contact information</footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
     <script src="./script.js"></script>
   </body>
 </html>

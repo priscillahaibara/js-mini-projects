@@ -1,9 +1,9 @@
 const products = [
-  { id: 1, name: "t-shirt", price: 20, img: "./assets/products/tshirt.jpg" },
-  { id: 2, name: "shoes", price: 50, img: "./assets/products/shoes.jpg" },
-  { id: 3, name: "jeans", price: 30, img: "./assets/products/jeans.jpg" },
-  { id: 4, name: "hat", price: 15, img: "./assets/products/hat.jpg" },
-  { id: 5, name: "dress", price: 40, img: "./assets/products/dress.jpg" },
+  { id: 1, name: "T-shirt", price: 20, img: "./assets/products/tshirt.jpg" },
+  { id: 2, name: "Shoes", price: 50, img: "./assets/products/shoes.jpg" },
+  { id: 3, name: "Jeans", price: 30, img: "./assets/products/jeans.jpg" },
+  { id: 4, name: "Hat", price: 15, img: "./assets/products/hat.jpg" },
+  { id: 5, name: "Dress", price: 40, img: "./assets/products/dress.jpg" },
 ];
 
 const productsSection = document.getElementById("products-section");
@@ -22,12 +22,18 @@ function saveItem() {
 function showItems() {
   products.forEach((product) => {
     const productContainer = document.createElement("div");
+    const productText = document.createElement("div");
     const productImg = document.createElement("img");
     const productName = document.createElement("h2");
     const productPrice = document.createElement("p");
     const addCartButton = document.createElement("button");
 
     productContainer.classList.add("product-container");
+    productText.classList.add("product-text");
+    productImg.classList.add("product-img");
+    productName.classList.add("product-name");
+    productPrice.classList.add("product-price");
+
     productImg.setAttribute("src", product.img);
     productImg.setAttribute("alt", product.name);
     productName.textContent = product.name;
@@ -37,9 +43,10 @@ function showItems() {
     addCartButton.dataset.id = product.id;
 
     productContainer.appendChild(productImg);
-    productContainer.appendChild(productName);
-    productContainer.appendChild(productPrice);
-    productContainer.appendChild(addCartButton);
+    productContainer.appendChild(productText);
+    productText.appendChild(productName);
+    productText.appendChild(productPrice);
+    productText.appendChild(addCartButton);
     productsSection.appendChild(productContainer);
 
     addCartButton.addEventListener("click", () => {
@@ -72,14 +79,58 @@ function updateCartSummary() {
 
 function renderCartItems() {
   cartItems.innerHTML = "";
+
   cart.forEach((item) => {
     const div = document.createElement("div");
+    div.classList.add("cart-item");
+
     const p = document.createElement("p");
-    p.textContent = `${item.name}: ${item.price} x ${item.quantity} = ${
-      item.price * item.quantity
-    }`;
+    p.textContent = `${item.name}: ${item.quantity}`;
+
+    const buttonDecrement = document.createElement("button");
+    buttonDecrement.textContent = "-";
+    buttonDecrement.classList.add("button-decrement");
+    buttonDecrement.dataset.id = item.id;
+
+    const buttonIncrement = document.createElement("button");
+    buttonIncrement.textContent = "+";
+    buttonIncrement.classList.add("button-increment");
+    buttonIncrement.dataset.id = item.id;
+
+    div.appendChild(buttonDecrement);
     div.appendChild(p);
+    div.appendChild(buttonIncrement);
+
     cartItems.appendChild(div);
+
+    cartItems;
+
+    buttonIncrement.addEventListener("click", () => {
+      const cartItem = cart.find((c) => c.id === item.id);
+
+      if (cartItem) {
+        cartItem.quantity += 1;
+        saveItem();
+        renderCartItems();
+        updateCartSummary();
+      }
+    });
+
+    buttonDecrement.addEventListener("click", () => {
+      const cartItemIndex = cart.findIndex((c) => c.id === item.id);
+
+      if (cartItemIndex !== -1) {
+        if (cart[cartItemIndex].quantity > 1) {
+          cart[cartItemIndex].quantity -= 1;
+        } else {
+          cart.splice(cartItemIndex, 1);
+        }
+
+        saveItem();
+        renderCartItems();
+        updateCartSummary();
+      }
+    });
   });
 }
 
