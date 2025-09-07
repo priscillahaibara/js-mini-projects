@@ -1,10 +1,5 @@
-const products = [
-  { id: 1, name: "T-shirt", price: 20, img: "./assets/products/tshirt.jpg" },
-  { id: 2, name: "Shoes", price: 50, img: "./assets/products/shoes.jpg" },
-  { id: 3, name: "Jeans", price: 30, img: "./assets/products/jeans.jpg" },
-  { id: 4, name: "Hat", price: 15, img: "./assets/products/hat.jpg" },
-  { id: 5, name: "Dress", price: 40, img: "./assets/products/dress.jpg" },
-];
+import { products } from "./js/data/products.js";
+import { loadCart, saveCart} from "./js/utils/localStorage.js";
 
 const productsSection = document.getElementById("products-section");
 const cartItems = document.getElementById("cart-items");
@@ -13,11 +8,13 @@ const addInputButton = document.getElementById("add-input-button");
 const totalQuantity = document.getElementById("total-quantity");
 const totalPrice = document.getElementById("total-price");
 
-let cart = JSON.parse(localStorage.getItem("item")) || [];
+let cart = loadCart();
+
+/* let cart = JSON.parse(localStorage.getItem("item")) || [];
 
 function saveItem() {
   localStorage.setItem("item", JSON.stringify(cart));
-}
+} */
 
 function showItems() {
   products.forEach((product) => {
@@ -51,15 +48,15 @@ function showItems() {
 
     addCartButton.addEventListener("click", () => {
       const productId = product.id;
-      const item = cart.find((i) => i.id === productId);
+      const cartItem = cart.find((i) => i.id === productId);
 
-      if (item) {
-        item.quantity += 1;
+      if (cartItem) {
+        cartItem.quantity += 1;
       } else {
         cart.push({ ...product, quantity: 1 });
       }
 
-      saveItem();
+      saveCart(cart);
       renderCartItems();
       updateCartSummary();
     });
@@ -110,7 +107,7 @@ function renderCartItems() {
 
       if (cartItem) {
         cartItem.quantity += 1;
-        saveItem();
+        saveCart(cart);
         renderCartItems();
         updateCartSummary();
       }
@@ -126,7 +123,7 @@ function renderCartItems() {
           cart.splice(cartItemIndex, 1);
         }
 
-        saveItem();
+        saveCart(cart);
         renderCartItems();
         updateCartSummary();
       }
