@@ -1,6 +1,7 @@
 import { products } from "./js/data/products.js";
 import { loadCart, saveCart } from "./js/utils/localStorage.js";
-import { addToCart, updateCartSummary } from "./js/utils/utils.js";
+import { addToCart } from "./js/utils/utils.js";
+import { renderCartSummary } from "./js/components/renderCartSummary.js";
 
 const productsSection = document.getElementById("products-section");
 const cartItems = document.getElementById("cart-items");
@@ -41,7 +42,7 @@ function showItems() {
       addToCart(product, cart);
       saveCart(cart);
       renderCartItems();
-      renderCartSummary();
+      renderCartSummary(cart);
     });
   });
 }
@@ -81,7 +82,7 @@ function renderCartItems() {
         cartItem.quantity += 1;
         saveCart(cart);
         renderCartItems();
-        renderCartSummary();
+        renderCartSummary(cart);
       }
     });
 
@@ -97,25 +98,15 @@ function renderCartItems() {
 
         saveCart(cart);
         renderCartItems();
-        renderCartSummary();
+        renderCartSummary(cart);
       }
     });
   });
 }
 
-function renderCartSummary() {
-  const { sumItems, sumPrice } = updateCartSummary(cart);
-
-  const totalQuantity = document.getElementById("total-quantity");
-  const totalPrice = document.getElementById("total-price");
-
-  totalQuantity.textContent = `Total quantity: ${sumItems}`;
-  totalPrice.textContent = `Total price: $${sumPrice.toFixed(2)}`;
-}
-
 showItems();
 renderCartItems();
-renderCartSummary();
+renderCartSummary(cart);
 
 const openCartBtn = document.getElementById("cart-icon");
 const closeCartBtn = document.getElementById("close-cart-button");
