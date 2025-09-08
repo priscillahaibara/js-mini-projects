@@ -49,9 +49,13 @@ header nav {
 }
 
 #input-section {
+  
+}
+
+#input-container {
   height: 10vh;
   padding-top: 10rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,6 +81,15 @@ header nav {
 
 #add-input-button:hover {
   background-color: lightgray;
+}
+
+#filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  gap: 1rem;
 }
 
 #products-section {
@@ -178,7 +191,8 @@ header nav {
   cursor: pointer;
 }
 
-#total-quantity, #total-price {
+#total-quantity,
+#total-price {
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
 }

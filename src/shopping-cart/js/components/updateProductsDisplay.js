@@ -10,18 +10,28 @@ export function updateProductDisplay(cart, filteredProducts) {
 
 export function getFilteredInput(cart) {
   const searchInput = document.getElementById("search-input");
+  const selectFilter = document.getElementById("select-filter");
 
   let timeoutId;
 
-  searchInput.addEventListener("input", () => {
-    clearTimeout(timeoutId);
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase();
+    const category = selectFilter.value;
 
-    timeoutId = setTimeout(() => {
-      const query = searchInput.value.toLowerCase();
-      const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(query)
-      );
-      updateProductDisplay(cart, filteredProducts);
-    }, 500);
-  });
+    const filteredProducts = products.filter((product) => {
+      const matchesName = product.name.toLowerCase().includes(query);
+      const matchesCategory = category === "all" ? true : product.category === category;
+
+      return matchesName && matchesCategory;
+    });
+
+    updateProductDisplay(cart, filteredProducts);
+  }
+
+  [searchInput, selectFilter].forEach((el) =>
+    el.addEventListener("input", () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(applyFilters, 500);
+    })
+  );
 }

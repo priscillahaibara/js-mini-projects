@@ -16,8 +16,19 @@
 
     <main>
       <section id="input-section">
-        <input type="text" placeholder="Search products..." id="search-input" />
-        <button id="add-input-button">Search</button>
+        <div id="input-container">
+          <input type="text" placeholder="Search products..." id="search-input" />
+          <button id="add-input-button">Search</button>
+        </div>
+        <div id="filter-container">
+          <p>Filter:</p>
+          <select id="select-filter">
+            <option value="all">All Categories</option>
+            <option value="clothing">Clothing</option>
+            <option value="footwear">Footwear</option>
+            <option value="accessories">Accessories</option>
+          </select>
+        </div>
       </section>
       <section id="products-section"></section>
 
@@ -31,8 +42,6 @@
         </div>
       </section>
     </main>
-
-    <footer>Contact information</footer>
 
     <script
       type="module"
