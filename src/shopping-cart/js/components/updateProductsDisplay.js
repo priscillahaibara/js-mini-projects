@@ -11,11 +11,17 @@ export function updateProductDisplay(cart, filteredProducts) {
 export function getFilteredInput(cart) {
   const searchInput = document.getElementById("search-input");
 
+  let timeoutId;
+
   searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
-    const filteredProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(query)
-    );
-    updateProductDisplay(cart, filteredProducts);
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      const query = searchInput.value.toLowerCase();
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(query)
+      );
+      updateProductDisplay(cart, filteredProducts);
+    }, 500);
   });
 }

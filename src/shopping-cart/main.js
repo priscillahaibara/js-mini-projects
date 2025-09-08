@@ -7,8 +7,8 @@ import { updateProductDisplay, getFilteredInput } from "./js/components/updatePr
 
 let cart = loadCart();
 
-updateProductDisplay(cart, products);
 getFilteredInput(cart);
+updateProductDisplay(cart, products);
 renderCartItems(cart);
 renderCartSummary(cart);
 setupCartModal();
