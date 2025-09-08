@@ -8,13 +8,17 @@ export function renderCartItems(cart) {
 
   cart.forEach((item) => {
     const div = document.createElement("div");
-    div.classList.add("cart-item");
+    div.classList.add("item-content");
 
-    const p = document.createElement("p");
-    p.textContent = `${item.name}: ${item.quantity}`;
+    const itemName = document.createElement("p");
+    itemName.textContent = item.name;
+    itemName.classList.add("item-name");
+
+    const itemQuantity = document.createElement("p");
+    itemQuantity.textContent = item.quantity;
 
     const buttonDecrement = document.createElement("button");
-    buttonDecrement.textContent = "-";
+    buttonDecrement.textContent = '-';
     buttonDecrement.classList.add("button-decrement");
     buttonDecrement.dataset.id = item.id;
 
@@ -24,8 +28,9 @@ export function renderCartItems(cart) {
     buttonIncrement.dataset.id = item.id;
 
     div.appendChild(buttonDecrement);
-    div.appendChild(p);
+    div.appendChild(itemQuantity);
     div.appendChild(buttonIncrement);
+    cartItems.appendChild(itemName);
     cartItems.appendChild(div);
 
     buttonIncrement.addEventListener("click", () => {

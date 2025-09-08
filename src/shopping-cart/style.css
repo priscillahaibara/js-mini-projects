@@ -23,7 +23,7 @@ li {
 }
 
 header {
-position: fixed;
+  position: fixed;
   height: 5rem;
   width: 100%;
   font-size: 1.8rem;
@@ -142,14 +142,42 @@ header nav {
 }
 
 #close-cart-button {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    font-size: 16px;
-    --ionicon-stroke-width: 36px;
-    cursor: pointer;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 16px;
+  --ionicon-stroke-width: 36px;
+  cursor: pointer;
 }
 
 .cart-modal.visible {
-    transform: translateX(0);
+  transform: translateX(0);
+}
+
+.item-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border: 0.5px solid black;
+  border-radius: 25px;
+  font-size: 1.4rem;
+}
+
+.button-decrement,
+.button-increment {
+  cursor: pointer;
+}
+
+#total-quantity, #total-price {
+  font-size: 1.6rem;
 }
