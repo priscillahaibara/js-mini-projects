@@ -58,7 +58,7 @@ header nav {
   gap: 0.5rem;
 }
 
-#input-items {
+#search-input {
   width: 30%;
   padding: 0.8rem 1rem;
   border: 1px solid black;
@@ -180,4 +180,5 @@ header nav {
 
 #total-quantity, #total-price {
   font-size: 1.6rem;
+  margin-bottom: 0.5rem;
 }

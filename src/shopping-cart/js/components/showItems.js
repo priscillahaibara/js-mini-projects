@@ -4,10 +4,12 @@ import { saveCart } from "../utils/localStorage.js";
 import { renderCartItems } from "./renderCartItems.js";
 import { renderCartSummary } from "./renderCartSummary.js";
 
-export function showItems(cart) {
+export function showItems(cart, filteredProducts) {
 const productsSection = document.getElementById("products-section");
 
-  products.forEach((product) => {
+productsSection.innerHTML = '';
+
+  filteredProducts.forEach((product) => {
     const productContainer = document.createElement("div");
     const productText = document.createElement("div");
     const productImg = document.createElement("img");
