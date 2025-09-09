@@ -7,6 +7,7 @@ For more details, feel free to explore the respective README.md files and source
 - [Calculator](https://priscillahaibara.github.io/js-mini-projects/src/basics/calculator) 
 - [Counter](https://priscillahaibara.github.io/js-mini-projects/src/basics/counter)
 - [Dog-generator](https://priscillahaibara.github.io/js-mini-projects/src/asynchronous/dog-generator)
+- [Shopping-cart](https://priscillahaibara.github.io/js-mini-projects/src/shopping-cart)
 - [To-do list](https://priscillahaibara.github.io/js-mini-projects/src/basics/todo)
 
 ## 🚧 Work in Progress
@@ -18,6 +19,7 @@ More projects coming soon! Stay tuned as I explore more frontend concepts.
 - DOM manipulation  
 - Asynchronous javascript
 - Web storage
+- Debouncing
 - Error handling  
 - Type safety and type annotations with TypeScript
 
