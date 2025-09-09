@@ -63,7 +63,7 @@ header nav {
 }
 
 #search-input {
-  width: 30%;
+  width: clamp(25rem, 60%, 40rem);
   padding: 0.8rem 1rem;
   border: 1px solid black;
   border-radius: 4px;
@@ -93,7 +93,7 @@ header nav {
 }
 
 #products-section {
-  max-width: 80rem;
+  max-width: clamp(30rem, 90%, 80rem);;
   margin: 0 auto 2rem auto;
   display: flex;
   flex-direction: column;
@@ -147,6 +147,7 @@ header nav {
   width: 30rem;
   height: 100vh;
   padding: 2rem;
+  background-color: white;
   box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
   z-index: 100;
   overflow-y: auto;
