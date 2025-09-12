@@ -14,10 +14,15 @@ async function fetchMovie(movieTitle) {
 
 export function searchMovie() {
   const searchInput = document.querySelector(".search__input");
+  let debounceTimer;
 
   searchInput.addEventListener("input", (e) => {
     const movieTitle = e.target.value;
-    fetchMovie(movieTitle);
+    
+    if (movieTitle.trim().length < 3) return;
+
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => fetchMovie(movieTitle), 500);
   });
 }
 
