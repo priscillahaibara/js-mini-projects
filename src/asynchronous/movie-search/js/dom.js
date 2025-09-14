@@ -1,10 +1,10 @@
-const resultsContainer = document.querySelector(".results__container");
-
 export function renderMessage(message) {
-  resultsContainer.textContent = `${message}`;
+  const resultsError = document.querySelector(".results__error");
+  resultsError.textContent = `${message}`;
 }
 
 export function renderSearchResults(movies) {
+  const resultsContainer = document.querySelector(".results__container");
   resultsContainer.innerHTML = "";
 
   movies.forEach((movie) => {
@@ -13,17 +13,17 @@ export function renderSearchResults(movies) {
     const movieTitle = document.createElement("h4");
     const movieYear = document.createElement("p");
 
-    movieContainer.classList.add('movie__container')
+    movieContainer.classList.add("movie__container");
 
     poster.setAttribute("src", movie.Poster);
     poster.setAttribute("alt", movie.Title);
-    poster.classList.add('movie__poster');
+    poster.classList.add("movie__poster");
 
     movieTitle.textContent = movie.Title;
-    movieTitle.classList.add('movie__title');
+    movieTitle.classList.add("movie__title");
 
     movieYear.textContent = movie.Year;
-    movieYear.classList.add('movie__year');
+    movieYear.classList.add("movie__year");
 
     movieContainer.appendChild(poster);
     movieContainer.appendChild(movieTitle);
