@@ -34,10 +34,16 @@ export function searchMovie() {
 
   searchInput.addEventListener("input", (e) => {
     const movieTitle = e.target.value;
+    
+    if (movieTitle === '') {
+      renderSearchResults([]);
+      renderMessage('');
+      return;
+    }
 
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
-      if (movieTitle.trim().length < 3) {
+      if (movieTitle.trim().length < 3 ) {
         renderMessage("Type at least 3 characters to search.");
         return;
       }
