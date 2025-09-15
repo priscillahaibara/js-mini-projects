@@ -1,3 +1,5 @@
+const PLACEHOLDER_POSTER = 'https://placehold.co/200x300';
+
 export function renderMessage(message) {
   const resultsError = document.querySelector(".results__error");
   resultsError.textContent = `${message}`;
@@ -15,7 +17,7 @@ export function renderSearchResults(movies) {
 
     movieContainer.classList.add("movie__container");
 
-    poster.setAttribute("src", movie.Poster);
+    poster.setAttribute("src", movie.Poster != 'N/A' ? movie.Poster : PLACEHOLDER_POSTER);
     poster.setAttribute("alt", movie.Title);
     poster.classList.add("movie__poster");
 
