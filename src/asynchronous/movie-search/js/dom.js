@@ -1,4 +1,19 @@
-const PLACEHOLDER_POSTER = 'https://placehold.co/200x300';
+const PLACEHOLDER_POSTER = "https://placehold.co/200x300";
+
+const resultsContainer = document.querySelector(".results__container");
+
+export function addSpinner() {
+  if (resultsContainer.querySelector(".spinner")) return;
+
+  const spinnerContainer = document.createElement("div");
+  spinnerContainer.classList.add("spinner");
+  resultsContainer.appendChild(spinnerContainer);
+}
+
+export function removeSpinner() {
+  const spinnerContainer = document.querySelector(".spinner");
+  if (spinnerContainer) spinnerContainer.remove();
+}
 
 export function renderMessage(message) {
   const resultsError = document.querySelector(".results__error");
@@ -6,7 +21,6 @@ export function renderMessage(message) {
 }
 
 export function renderSearchResults(movies) {
-  const resultsContainer = document.querySelector(".results__container");
   resultsContainer.innerHTML = "";
 
   movies.forEach((movie) => {
@@ -17,7 +31,10 @@ export function renderSearchResults(movies) {
 
     movieContainer.classList.add("movie__container");
 
-    poster.setAttribute("src", movie.Poster != 'N/A' ? movie.Poster : PLACEHOLDER_POSTER);
+    poster.setAttribute(
+      "src",
+      movie.Poster != "N/A" ? movie.Poster : PLACEHOLDER_POSTER
+    );
     poster.setAttribute("alt", movie.Title);
     poster.classList.add("movie__poster");
 

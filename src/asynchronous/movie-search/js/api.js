@@ -1,5 +1,10 @@
 import { MY_API_KEY } from "../config.js";
-import { renderMessage, renderSearchResults } from "./dom.js";
+import {
+  addSpinner,
+  removeSpinner,
+  renderMessage,
+  renderSearchResults,
+} from "./dom.js";
 
 const BASE_URL = "https://www.omdbapi.com/";
 const OMDB_API_KEY = MY_API_KEY;
@@ -23,7 +28,10 @@ async function fetchMovie(movieTitle) {
     }
   } catch (err) {
     console.error("Error fetching movie:", err);
+    renderMessage('Something went wrong. Please try again.')
     return null;
+  } finally {
+    removeSpinner();
   }
 }
 
@@ -34,19 +42,21 @@ export function searchMovie() {
 
   searchInput.addEventListener("input", (e) => {
     const movieTitle = e.target.value;
-    
-    if (movieTitle === '') {
+
+    if (movieTitle === "") {
       renderSearchResults([]);
-      renderMessage('');
+      renderMessage("");
       return;
     }
 
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
-      if (movieTitle.trim().length < 3 ) {
+      if (movieTitle.trim().length < 3) {
         renderMessage("Type at least 3 characters to search.");
         return;
       }
+
+      addSpinner();
 
       fetchMovie(movieTitle);
     }, 500);

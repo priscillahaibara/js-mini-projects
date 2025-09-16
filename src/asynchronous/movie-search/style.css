@@ -64,7 +64,9 @@ button {
   width: 100%;
 }
 
-.search, .results, .favorites {
+.search,
+.results,
+.favorites {
   width: 100%;
   max-width: 60rem;
   margin: 0 auto;
@@ -124,7 +126,7 @@ button {
 
 .movie__container {
   cursor: pointer;
-  color: #cccccc
+  color: #cccccc;
 }
 
 .movie__poster {
@@ -132,7 +134,7 @@ button {
   height: 20rem;
   object-fit: fill;
   border-radius: 2px;
-  margin-bottom: 1rem;  
+  margin-bottom: 1rem;
 }
 
 .movie__title {
@@ -143,4 +145,22 @@ button {
 
 .movie__year {
   font-size: 1.2rem;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 6px solid #ddd;
+  border-top: 6px solid #222831;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
