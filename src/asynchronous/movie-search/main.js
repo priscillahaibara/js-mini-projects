@@ -1,3 +1,4 @@
-import { searchMovie } from "./js/api.js";
+import { setupMovieDetails, searchMovie } from "./js/api.js";
 
 searchMovie();
+setupMovieDetails();

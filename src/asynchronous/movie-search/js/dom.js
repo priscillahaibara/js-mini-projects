@@ -30,6 +30,7 @@ export function renderSearchResults(movies) {
     const movieYear = document.createElement("p");
 
     movieContainer.classList.add("movie__container");
+    movieContainer.dataset.id = movie.imdbID;
 
     poster.setAttribute(
       "src",
@@ -49,4 +50,8 @@ export function renderSearchResults(movies) {
     movieContainer.appendChild(movieYear);
     resultsContainer.appendChild(movieContainer);
   });
+}
+
+export function renderMovieDetails() {
+  
 }

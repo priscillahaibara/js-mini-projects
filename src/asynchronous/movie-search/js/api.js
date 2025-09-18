@@ -3,6 +3,7 @@ import {
   addSpinner,
   removeSpinner,
   renderMessage,
+  renderMovieDetails,
   renderSearchResults,
 } from "./dom.js";
 
@@ -47,6 +48,25 @@ async function fetchMovie(movieTitle) {
   }
 }
 
+async function fetchMovieDetails(imdbID) {
+  try {
+    const response = await fetch(
+      `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${imdbID}`
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Movie details:", data);
+    renderMovieDetails(data);
+  } catch (err) {
+    console.error("Error fetching movie details:", err);
+    renderMessage("Something went wrong while fetching movie details.");
+    return null;
+  }
+}
+
 export function searchMovie() {
   const searchInput = document.querySelector(".search__input");
 
@@ -72,5 +92,19 @@ export function searchMovie() {
 
       fetchMovie(movieTitle);
     }, 500);
+  });
+}
+
+export function setupMovieDetails() {
+  const resultsContainer = document.querySelector(".results__container");
+
+  if (!resultsContainer) return;
+
+  resultsContainer.addEventListener("click", (e) => {
+    const movieContainer = e.target.closest(".movie__container");
+    if (!movieContainer) return;
+
+    const imdbID = movieContainer.dataset.id;
+    fetchMovieDetails(imdbID);
   });
 }
