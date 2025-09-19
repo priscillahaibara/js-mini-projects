@@ -23,6 +23,9 @@ export function renderMessage(message) {
 export function renderSearchResults(movies) {
   resultsContainer.innerHTML = "";
 
+  const movieListContainer = document.createElement("div");
+  movieListContainer.classList.add("movie__list-container");
+
   movies.forEach((movie) => {
     const movieContainer = document.createElement("div");
     const poster = document.createElement("img");
@@ -48,10 +51,47 @@ export function renderSearchResults(movies) {
     movieContainer.appendChild(poster);
     movieContainer.appendChild(movieTitle);
     movieContainer.appendChild(movieYear);
-    resultsContainer.appendChild(movieContainer);
+    movieListContainer.appendChild(movieContainer);
+    resultsContainer.appendChild(movieListContainer);
   });
 }
 
-export function renderMovieDetails() {
-  
+export function renderMovieDetails(data) {
+  resultsContainer.innerHTML = "";
+
+  const movieDetailContainer = document.createElement("div");
+  movieDetailContainer.classList.add("movie__container--detail");
+
+  const poster = document.createElement("img");
+  poster.setAttribute(
+    "src",
+    data.Poster != "N/A" ? data.Poster : PLACEHOLDER_POSTER
+  );
+  poster.setAttribute("alt", data.Title);
+  poster.classList.add("movie__poster--detail");
+
+  const movieTitle = document.createElement("h4");
+  movieTitle.classList.add("movie__title--detail");
+  movieTitle.textContent = data.Title;
+
+  const moviePlot = document.createElement("p");
+  moviePlot.textContent = data.Plot;
+
+  const movieGenre = document.createElement("p");
+  movieGenre.classList.add("movie__genre");
+  movieGenre.textContent = `Genre: ${data.Genre}`;
+
+  const movieDuration = document.createElement("p");
+  movieDuration.textContent = `Duration: ${data.Runtime}`;
+
+  const movieRating = document.createElement("p");
+  movieRating.textContent = `IMDB rating: ${data.imdbRating}`;
+
+  movieDetailContainer.appendChild(poster);
+  movieDetailContainer.appendChild(movieTitle);
+  movieDetailContainer.appendChild(moviePlot);
+  movieDetailContainer.appendChild(movieGenre);
+  movieDetailContainer.appendChild(movieDuration);
+  movieDetailContainer.appendChild(movieRating);
+  resultsContainer.appendChild(movieDetailContainer);
 }

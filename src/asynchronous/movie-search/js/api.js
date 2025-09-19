@@ -89,7 +89,7 @@ export function searchMovie() {
       }
 
       addSpinner();
-
+      renderMessage('');
       fetchMovie(movieTitle);
     }, 500);
   });
@@ -99,6 +99,8 @@ export function setupMovieDetails() {
   const resultsContainer = document.querySelector(".results__container");
 
   if (!resultsContainer) return;
+
+  renderMessage('');
 
   resultsContainer.addEventListener("click", (e) => {
     const movieContainer = e.target.closest(".movie__container");
