@@ -62,6 +62,19 @@ export function renderMovieDetails(data) {
   const movieDetailContainer = document.createElement("div");
   movieDetailContainer.classList.add("movie__container--detail");
 
+  const movieIcons = document.createElement('div');
+  movieIcons.classList.add('movie__icons');
+
+  const backButton = document.createElement('button');
+  const backIcon = document.createElement('ion-icon');
+  backIcon.classList.add('movie__icon--back');
+  backIcon.setAttribute('name', 'arrow-back-circle-outline');
+
+  const favoriteButton = document.createElement('button');
+  const favoriteIcon = document.createElement('ion-icon');
+  favoriteIcon.classList.add('movie__icon--favorite')
+  favoriteIcon.setAttribute('name', 'star-outline');
+
   const poster = document.createElement("img");
   poster.setAttribute(
     "src",
@@ -87,6 +100,11 @@ export function renderMovieDetails(data) {
   const movieRating = document.createElement("p");
   movieRating.textContent = `IMDB rating: ${data.imdbRating}`;
 
+  backButton.appendChild(backIcon);
+  favoriteButton.appendChild(favoriteIcon);
+  movieIcons.appendChild(backButton);
+  movieIcons.appendChild(favoriteIcon);
+  movieDetailContainer.appendChild(movieIcons);
   movieDetailContainer.appendChild(poster);
   movieDetailContainer.appendChild(movieTitle);
   movieDetailContainer.appendChild(moviePlot);
@@ -95,3 +113,4 @@ export function renderMovieDetails(data) {
   movieDetailContainer.appendChild(movieRating);
   resultsContainer.appendChild(movieDetailContainer);
 }
+
