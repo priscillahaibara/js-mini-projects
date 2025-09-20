@@ -152,6 +152,16 @@ button {
   font-size: 1.2rem;
 }
 
+.movie__icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie__icon--back, .movie__icon--favorite {
+  cursor: pointer;
+  font-size: 36px;
+}
+
 .movie__title--detail {
   font-size: 2rem;
   font-weight: bold;
