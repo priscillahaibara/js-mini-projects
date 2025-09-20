@@ -56,7 +56,7 @@ export function renderSearchResults(movies) {
   });
 }
 
-export function renderMovieDetails(data) {
+export function renderMovieDetails(data, lastResults = []) {
   resultsContainer.innerHTML = "";
 
   const movieDetailContainer = document.createElement("div");
@@ -69,6 +69,10 @@ export function renderMovieDetails(data) {
   const backIcon = document.createElement('ion-icon');
   backIcon.classList.add('movie__icon--back');
   backIcon.setAttribute('name', 'arrow-back-circle-outline');
+
+  backButton.addEventListener('click', () => {
+    renderSearchResults(lastResults);
+  })
 
   const favoriteButton = document.createElement('button');
   const favoriteIcon = document.createElement('ion-icon');
@@ -103,7 +107,7 @@ export function renderMovieDetails(data) {
   backButton.appendChild(backIcon);
   favoriteButton.appendChild(favoriteIcon);
   movieIcons.appendChild(backButton);
-  movieIcons.appendChild(favoriteIcon);
+  movieIcons.appendChild(favoriteButton);
   movieDetailContainer.appendChild(movieIcons);
   movieDetailContainer.appendChild(poster);
   movieDetailContainer.appendChild(movieTitle);
