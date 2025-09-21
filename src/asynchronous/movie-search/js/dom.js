@@ -2,9 +2,9 @@ import { getFavorites, saveFavorites } from "./favorites.js";
 
 const PLACEHOLDER_POSTER = "https://placehold.co/200x300";
 
-const resultsContainer = document.querySelector(".results__container");
-
 export function addSpinner() {
+  const resultsContainer = document.querySelector(".results__container");
+
   if (resultsContainer.querySelector(".spinner")) return;
 
   const spinnerContainer = document.createElement("div");
@@ -22,43 +22,52 @@ export function renderMessage(message) {
   resultsError.textContent = `${message}`;
 }
 
+export function createMovieCard(movie) {
+  const movieContainer = document.createElement("div");
+  const poster = document.createElement("img");
+  const movieTitle = document.createElement("h4");
+  const movieYear = document.createElement("p");
+
+  movieContainer.classList.add("movie__container");
+  movieContainer.dataset.id = movie.imdbID;
+
+  poster.setAttribute(
+    "src",
+    movie.Poster != "N/A" ? movie.Poster : PLACEHOLDER_POSTER
+  );
+  poster.setAttribute("alt", movie.Title);
+  poster.classList.add("movie__poster");
+
+  movieTitle.textContent = movie.Title;
+  movieTitle.classList.add("movie__title");
+
+  movieYear.textContent = movie.Year;
+  movieYear.classList.add("movie__year");
+
+  movieContainer.appendChild(poster);
+  movieContainer.appendChild(movieTitle);
+  movieContainer.appendChild(movieYear);
+
+  return movieContainer;
+}
+
 export function renderSearchResults(movies) {
-  resultsContainer.innerHTML = "";
+  const resultsContainer = document.querySelector(".results__container");
 
   const movieListContainer = document.createElement("div");
   movieListContainer.classList.add("movie__list-container");
 
+  resultsContainer.innerHTML = "";
+
   movies.forEach((movie) => {
-    const movieContainer = document.createElement("div");
-    const poster = document.createElement("img");
-    const movieTitle = document.createElement("h4");
-    const movieYear = document.createElement("p");
-
-    movieContainer.classList.add("movie__container");
-    movieContainer.dataset.id = movie.imdbID;
-
-    poster.setAttribute(
-      "src",
-      movie.Poster != "N/A" ? movie.Poster : PLACEHOLDER_POSTER
-    );
-    poster.setAttribute("alt", movie.Title);
-    poster.classList.add("movie__poster");
-
-    movieTitle.textContent = movie.Title;
-    movieTitle.classList.add("movie__title");
-
-    movieYear.textContent = movie.Year;
-    movieYear.classList.add("movie__year");
-
-    movieContainer.appendChild(poster);
-    movieContainer.appendChild(movieTitle);
-    movieContainer.appendChild(movieYear);
-    movieListContainer.appendChild(movieContainer);
-    resultsContainer.appendChild(movieListContainer);
+    const movieCard = createMovieCard(movie);
+    movieListContainer.appendChild(movieCard);
   });
+  resultsContainer.appendChild(movieListContainer);
 }
 
 export function renderMovieDetails(data, lastResults = []) {
+  const resultsContainer = document.querySelector(".results__container");
   resultsContainer.innerHTML = "";
 
   const movieDetailContainer = document.createElement("div");
@@ -129,38 +138,14 @@ export function renderMovieDetails(data, lastResults = []) {
 export function renderFavorites() {
   const favorites = getFavorites();
   const favoritesContainer = document.querySelector(".favorites__container");
-
-  favoritesContainer.innerHTML = "";
-
   const movieListContainer = document.createElement("div");
   movieListContainer.classList.add("movie__list-container");
 
+  favoritesContainer.innerHTML = "";
+
   favorites.forEach((movie) => {
-    const movieContainer = document.createElement("div");
-    const poster = document.createElement("img");
-    const movieTitle = document.createElement("h4");
-    const movieYear = document.createElement("p");
-
-    movieContainer.classList.add("movie__container");
-    movieContainer.dataset.id = movie.imdbID;
-
-    poster.setAttribute(
-      "src",
-      movie.Poster != "N/A" ? movie.Poster : PLACEHOLDER_POSTER
-    );
-    poster.setAttribute("alt", movie.Title);
-    poster.classList.add("movie__poster");
-
-    movieTitle.textContent = movie.Title;
-    movieTitle.classList.add("movie__title");
-
-    movieYear.textContent = movie.Year;
-    movieYear.classList.add("movie__year");
-
-    movieContainer.appendChild(poster);
-    movieContainer.appendChild(movieTitle);
-    movieContainer.appendChild(movieYear);
-    movieListContainer.appendChild(movieContainer);
-    favoritesContainer.appendChild(movieListContainer);
+    const movieCard = createMovieCard(movie);
+    movieListContainer.appendChild(movieCard);
   });
+  favoritesContainer.appendChild(movieListContainer);
 }
