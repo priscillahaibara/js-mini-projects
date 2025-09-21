@@ -11,6 +11,7 @@ const BASE_URL = "https://www.omdbapi.com/";
 const OMDB_API_KEY = MY_API_KEY;
 
 let controller = null;
+let lastResults = [];
 
 async function fetchMovie(movieTitle) {
   if (controller) controller.abort();
@@ -31,8 +32,10 @@ async function fetchMovie(movieTitle) {
     console.log("Fetched data:", data);
 
     if (data.Search && data.Search.length > 0) {
+      lastResults = data.Search;
       renderSearchResults(data.Search);
     } else {
+      lastResults = [];
       renderMessage("No movies found for this title.");
     }
   } catch (err) {
@@ -59,7 +62,7 @@ async function fetchMovieDetails(imdbID) {
 
     const data = await response.json();
     console.log("Movie details:", data);
-    renderMovieDetails(data);
+    renderMovieDetails(data, lastResults);
   } catch (err) {
     console.error("Error fetching movie details:", err);
     renderMessage("Something went wrong while fetching movie details.");
@@ -109,4 +112,18 @@ export function setupMovieDetails() {
     const imdbID = movieContainer.dataset.id;
     fetchMovieDetails(imdbID);
   });
+}
+
+export function setupFavoritesDetails() {
+    const favoritesContainer = document.querySelector('.favorites__container');
+
+    if (!favoritesContainer) return;
+
+    favoritesContainer.addEventListener('click', (e) => {
+      const movieContainer = e.target.closest('.movie__container');
+      if (!movieContainer) return;
+
+      const imdbID = movieContainer.dataset.id;
+      fetchMovieDetails(imdbID);
+    })
 }
