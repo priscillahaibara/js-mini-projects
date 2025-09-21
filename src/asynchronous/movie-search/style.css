@@ -49,6 +49,7 @@ button {
 }
 
 .header {
+  position: fixed;
   display: flex;
   align-items: center;
   width: 100%;
@@ -85,7 +86,7 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 3rem;
+  padding-top: 7rem;
 }
 
 .search__title {
