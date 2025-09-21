@@ -1,3 +1,5 @@
+import { getFavorites, saveFavorites } from "./favorites.js";
+
 const PLACEHOLDER_POSTER = "https://placehold.co/200x300";
 
 const resultsContainer = document.querySelector(".results__container");
@@ -62,22 +64,28 @@ export function renderMovieDetails(data, lastResults = []) {
   const movieDetailContainer = document.createElement("div");
   movieDetailContainer.classList.add("movie__container--detail");
 
-  const movieIcons = document.createElement('div');
-  movieIcons.classList.add('movie__icons');
+  const movieIcons = document.createElement("div");
+  movieIcons.classList.add("movie__icons");
 
-  const backButton = document.createElement('button');
-  const backIcon = document.createElement('ion-icon');
-  backIcon.classList.add('movie__icon--back');
-  backIcon.setAttribute('name', 'arrow-back-circle-outline');
+  const backButton = document.createElement("button");
+  const backIcon = document.createElement("ion-icon");
+  backIcon.classList.add("movie__icon--back");
+  backIcon.setAttribute("name", "arrow-back-circle-outline");
 
-  backButton.addEventListener('click', () => {
+  backButton.addEventListener("click", () => {
     renderSearchResults(lastResults);
-  })
+  });
 
-  const favoriteButton = document.createElement('button');
-  const favoriteIcon = document.createElement('ion-icon');
-  favoriteIcon.classList.add('movie__icon--favorite')
-  favoriteIcon.setAttribute('name', 'star-outline');
+  const favoriteButton = document.createElement("button");
+  const favoriteIcon = document.createElement("ion-icon");
+  favoriteIcon.classList.add("movie__icon--favorite");
+  favoriteIcon.setAttribute("name", "star-outline");
+
+  favoriteButton.addEventListener("click", () => {
+    console.log("clicked");
+    saveFavorites(data);
+    renderFavorites();
+  });
 
   const poster = document.createElement("img");
   poster.setAttribute(
@@ -118,3 +126,41 @@ export function renderMovieDetails(data, lastResults = []) {
   resultsContainer.appendChild(movieDetailContainer);
 }
 
+export function renderFavorites() {
+  const favorites = getFavorites();
+  const favoritesContainer = document.querySelector(".favorites__container");
+
+  favoritesContainer.innerHTML = "";
+
+  const movieListContainer = document.createElement("div");
+  movieListContainer.classList.add("movie__list-container");
+
+  favorites.forEach((movie) => {
+    const movieContainer = document.createElement("div");
+    const poster = document.createElement("img");
+    const movieTitle = document.createElement("h4");
+    const movieYear = document.createElement("p");
+
+    movieContainer.classList.add("movie__container");
+    movieContainer.dataset.id = movie.imdbID;
+
+    poster.setAttribute(
+      "src",
+      movie.Poster != "N/A" ? movie.Poster : PLACEHOLDER_POSTER
+    );
+    poster.setAttribute("alt", movie.Title);
+    poster.classList.add("movie__poster");
+
+    movieTitle.textContent = movie.Title;
+    movieTitle.classList.add("movie__title");
+
+    movieYear.textContent = movie.Year;
+    movieYear.classList.add("movie__year");
+
+    movieContainer.appendChild(poster);
+    movieContainer.appendChild(movieTitle);
+    movieContainer.appendChild(movieYear);
+    movieListContainer.appendChild(movieContainer);
+    favoritesContainer.appendChild(movieListContainer);
+  });
+}

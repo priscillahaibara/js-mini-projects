@@ -175,6 +175,10 @@ button {
   height: auto;
 }
 
+.favorites__title {
+  margin-bottom: 1rem;
+}
+
 .spinner {
   width: 48px;
   height: 48px;
