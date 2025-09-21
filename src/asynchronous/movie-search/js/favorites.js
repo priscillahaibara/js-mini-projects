@@ -13,3 +13,7 @@ export function saveFavorites(movie) {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 }
+
+export function updateFavorites(newFavorites) {
+  localStorage.setItem('favorites', JSON.stringify(newFavorites))
+}

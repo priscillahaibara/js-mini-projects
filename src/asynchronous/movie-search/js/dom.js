@@ -1,4 +1,4 @@
-import { getFavorites, saveFavorites } from "./favorites.js";
+import { getFavorites, saveFavorites, updateFavorites } from "./favorites.js";
 
 const PLACEHOLDER_POSTER = "https://placehold.co/200x300";
 
@@ -66,6 +66,21 @@ export function renderSearchResults(movies) {
   resultsContainer.appendChild(movieListContainer);
 }
 
+export function renderFavorites() {
+  const favorites = getFavorites();
+  const favoritesContainer = document.querySelector(".favorites__container");
+  const movieListContainer = document.createElement("div");
+  movieListContainer.classList.add("movie__list-container");
+
+  favoritesContainer.innerHTML = "";
+
+  favorites.forEach((movie) => {
+    const movieCard = createMovieCard(movie);
+    movieListContainer.appendChild(movieCard);
+  });
+  favoritesContainer.appendChild(movieListContainer);
+}
+
 export function renderMovieDetails(data, lastResults = []) {
   const resultsContainer = document.querySelector(".results__container");
   resultsContainer.innerHTML = "";
@@ -88,11 +103,26 @@ export function renderMovieDetails(data, lastResults = []) {
   const favoriteButton = document.createElement("button");
   const favoriteIcon = document.createElement("ion-icon");
   favoriteIcon.classList.add("movie__icon--favorite");
-  favoriteIcon.setAttribute("name", "star-outline");
+
+  const favorites = getFavorites();
+  const isFavorite = favorites.some((fav) => fav.imdbID === data.imdbID);
+  favoriteIcon.setAttribute("name", isFavorite ? "star" : "star-outline");
 
   favoriteButton.addEventListener("click", () => {
-    console.log("clicked");
-    saveFavorites(data);
+    const favorites = getFavorites(); 
+    const isFavorite = favorites.some((fav) => fav.imdbID === data.imdbID);
+
+    if (isFavorite) {
+      const newFavorites = favorites.filter(
+        (fav) => fav.imdbID !== data.imdbID
+      );
+      updateFavorites(newFavorites);
+      favoriteIcon.setAttribute("name", "star-outline");
+    } else {
+      favoriteIcon.setAttribute("name", "star");
+      saveFavorites(data);
+    }
+
     renderFavorites();
   });
 
@@ -133,19 +163,4 @@ export function renderMovieDetails(data, lastResults = []) {
   movieDetailContainer.appendChild(movieDuration);
   movieDetailContainer.appendChild(movieRating);
   resultsContainer.appendChild(movieDetailContainer);
-}
-
-export function renderFavorites() {
-  const favorites = getFavorites();
-  const favoritesContainer = document.querySelector(".favorites__container");
-  const movieListContainer = document.createElement("div");
-  movieListContainer.classList.add("movie__list-container");
-
-  favoritesContainer.innerHTML = "";
-
-  favorites.forEach((movie) => {
-    const movieCard = createMovieCard(movie);
-    movieListContainer.appendChild(movieCard);
-  });
-  favoritesContainer.appendChild(movieListContainer);
 }
