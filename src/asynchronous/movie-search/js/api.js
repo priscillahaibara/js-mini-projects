@@ -113,3 +113,17 @@ export function setupMovieDetails() {
     fetchMovieDetails(imdbID);
   });
 }
+
+export function setupFavoritesDetails() {
+    const favoritesContainer = document.querySelector('.favorites__container');
+
+    if (!favoritesContainer) return;
+
+    favoritesContainer.addEventListener('click', (e) => {
+      const movieContainer = e.target.closest('.movie__container');
+      if (!movieContainer) return;
+
+      const imdbID = movieContainer.dataset.id;
+      fetchMovieDetails(imdbID);
+    })
+}
